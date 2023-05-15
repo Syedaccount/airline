@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'airline',
         'USER': 'root',
         'HOST': 'localhost',
-        'PASSWORD': 'abc*123ABCs'
+        'PASSWORD': 'abc*123ABC'
     }
 }
 
