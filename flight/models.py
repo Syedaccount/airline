@@ -7,3 +7,18 @@ class Airport(models.Model):
 
     def __str__(self):
         return f"{self.city} ({self.code})"
+
+
+class Flight(models.Model):
+    origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="departures")
+    destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="arrivals")
+    duration = models.IntegerField()
+
+
+class Passenger(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    flights = models.ManyToManyField(Flight, blank=True, null=True, related_name="passengers")
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
