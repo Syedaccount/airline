@@ -1,3 +1,4 @@
 airline/__pycache__/
 flight/__pycache__/
 flight/migrations/__pycache__/
+.idea/airline.iml
