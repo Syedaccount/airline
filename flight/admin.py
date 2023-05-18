@@ -7,24 +7,33 @@ from .models import Airport, Flight, Passenger
 
 @admin.register(Airport)
 class AirportAdmin(admin.ModelAdmin):
-    list_display = ["city", "code"]
+    list_display = ["city", "code", "is_open"]
     search_fields = ["city"]
+    list_editable = ["is_open"]
 
 
 @admin.register(Flight)
 class FlightAdmin(admin.ModelAdmin):
     autocomplete_fields = ["origin", "destination"]
-    list_display = ["origin", "destination", "date_time", "passengers_count", "duration"]
+    list_display = ["origin", "destination", "date_time",
+                    "passengers_count", "duration", "total_seat",
+                    "remaining_seat"]
     list_filter = ["origin", "destination"]
-
-    @admin.display(ordering="passengers_count")
-    def passengers_count(self, flight: Flight):
-        return flight.passengers.count()
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
             passengers_count=Count("passengers")
         )
+
+    @admin.display(ordering="passengers_count")
+    def passengers_count(self, flight: Flight):
+        url = (
+                reverse("admin:flight_passenger_changelist")
+                + "?"
+                + urlencode({
+                    "flight__id": str(flight.id)
+                }))
+        return format_html('<a href="{}">{}</a>', url, flight.passengers_count)
 
 
 @admin.register(Passenger)
