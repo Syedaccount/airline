@@ -14,6 +14,7 @@ class Flight(models.Model):
     origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="departures")
     destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="arrivals")
     duration = models.IntegerField()
+    date_time = models.DateTimeField(auto_now_add=True)
 
 
 class Passenger(models.Model):
