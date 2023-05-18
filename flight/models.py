@@ -2,9 +2,17 @@ from django.db import models
 
 
 class Airport(models.Model):
+
+    IS_OPEN_YES = "Yes"
+    IS_OPEN_NO = "No"
+
+    IS_OPEN_CHOICES = [
+        (IS_OPEN_YES, "Yes"),
+        (IS_OPEN_NO, "No")
+    ]
     city = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
-    is_open = models.BooleanField(default=True)
+    is_open = models.CharField(max_length=5, choices=IS_OPEN_CHOICES, default=IS_OPEN_YES)
 
     def __str__(self):
         return f"{self.city} ({self.code})"
