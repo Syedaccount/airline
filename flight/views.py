@@ -22,6 +22,7 @@ class FlightViewSet(ModelViewSet):
 
 class PassengerViewSet(ModelViewSet):
     serializer_class = PassengerSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Passenger.objects.filter(id=self.kwargs.get("flight_pk"))

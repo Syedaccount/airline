@@ -9,6 +9,7 @@ router = routers.DefaultRouter()
 
 router.register("airports", views.AirportViewSet, basename="airports")
 router.register("flights", views.FlightViewSet, basename="flights")
+router.register("passengers", views.PassengerViewSet, basename="passengers")
 
 flights_router = routers.NestedDefaultRouter(router, "flights", lookup="flight")
 flights_router.register("passengers", views.PassengerViewSet, basename="flight_passengers")
