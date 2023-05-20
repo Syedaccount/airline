@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Airport, Flight, Passenger
-from .serializers import AirportSerializer, FlightSerializer, PassengerSerializer
+from .serializers import AirportSerializer, FlightSerializer, PassengerSerializer, CreateFlightSerializer
 
 
 class AirportViewSet(ModelViewSet):
@@ -10,7 +10,11 @@ class AirportViewSet(ModelViewSet):
 
 class FlightViewSet(ModelViewSet):
     queryset = Flight.objects.all()
-    serializer_class = FlightSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return CreateFlightSerializer
+        return FlightSerializer
 
 
 class PassengerViewSet(ModelViewSet):
