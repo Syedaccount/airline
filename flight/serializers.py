@@ -29,4 +29,7 @@ class FlightSerializer(serializers.ModelSerializer):
     passengers = PassengerSerializer(many=True, read_only=True)
 
 
-
+class BookFlightSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ["flight", "passenger"]
+        model = BookFlight

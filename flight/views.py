@@ -1,6 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
-from .models import Airport, Flight, Passenger
-from .serializers import AirportSerializer, FlightSerializer, PassengerSerializer, CreateFlightSerializer
+from .models import Airport, Flight, Passenger, BookFlight
+from .serializers import (AirportSerializer, FlightSerializer,
+                          PassengerSerializer, CreateFlightSerializer,
+                          BookFlightSerializer)
 
 
 class AirportViewSet(ModelViewSet):
@@ -22,3 +24,8 @@ class PassengerViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Passenger.objects.filter(id=self.kwargs.get("flight_pk"))
+
+
+class BookFlightViewSet(ModelViewSet):
+    queryset = BookFlight.objects.all()
+    serializer_class = BookFlightSerializer

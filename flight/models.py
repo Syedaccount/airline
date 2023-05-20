@@ -40,3 +40,8 @@ class Passenger(models.Model):
 
     def last_name(self):
         return self.user.last_name
+
+
+class BookFlight(models.Model):
+    flight = models.ManyToManyField(Flight, on_delete=models.CASCADE, related_name="reservations")
+    passenger = models.ManyToManyField(Passenger, on_delete=models.CASCADE)
