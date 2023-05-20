@@ -43,5 +43,5 @@ class Passenger(models.Model):
 
 
 class BookFlight(models.Model):
-    flight = models.ManyToManyField(Flight, related_name="reservations")
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name="reservations")
     passenger = models.ManyToManyField(Passenger)

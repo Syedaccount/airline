@@ -33,3 +33,11 @@ class BookFlightSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ["flight", "passenger"]
         model = BookFlight
+
+    flight = FlightSerializer(read_only=True)
+    passenger = PassengerSerializer(read_only=True, many=True)
+
+    def create(self, validated_data):
+        print("create -----------------=============")
+        print(self.context)
+        print(validated_data)

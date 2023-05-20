@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import Count
 from django.utils.html import urlencode, format_html
 from django.urls import reverse
-from .models import Airport, Flight, Passenger
+from .models import Airport, Flight, Passenger, BookFlight
 
 
 @admin.register(Airport)
@@ -55,3 +55,7 @@ class PassengerAdmin(admin.ModelAdmin):
                 }))
         return format_html('<a href="{}">{}</a>', url, passenger.flights_count)
 
+
+@admin.register(BookFlight)
+class BookFlightAdmin(admin.ModelAdmin):
+    list_display = ["flight"]
