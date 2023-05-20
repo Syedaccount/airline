@@ -8,13 +8,25 @@ class AirportSerializer(serializers.ModelSerializer):
         model = Airport
 
 
-class FlightSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ["origin", "destination", "duration", "passengers"]
-        model = Flight
-
-
 class PassengerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ["first_name", "last_name"]
         model = Passenger
+
+
+class CreateFlightSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ["origin", "destination", "duration", "total_seat", "remaining_seat"]
+        model = Flight
+
+
+class FlightSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ["origin", "destination", "duration", "passengers", "total_seat", "remaining_seat"]
+        model = Flight
+    origin = AirportSerializer()
+    destination = AirportSerializer()
+    passengers = PassengerSerializer(many=True, read_only=True)
+
+
+
