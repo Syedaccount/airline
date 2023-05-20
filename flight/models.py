@@ -30,9 +30,13 @@ class Flight(models.Model):
 
 class Passenger(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
     flight = models.ManyToManyField(Flight, blank=True, related_name="passengers")
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
+
+    def first_name(self):
+        return self.user.first_name
+
+    def last_name(self):
+        return self.user.last_name
