@@ -1,4 +1,5 @@
 from django.db import models
+from django.core import settings
 
 
 class Airport(models.Model):
@@ -28,6 +29,7 @@ class Flight(models.Model):
 
 
 class Passenger(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MDDEL, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     flight = models.ManyToManyField(Flight, blank=True, related_name="passengers")
