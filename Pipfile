@@ -11,6 +11,8 @@ djangorestframework = "*"
 django-debug-toolbar = "*"
 django-extensions = "*"
 ipython = "*"
+djoser = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
