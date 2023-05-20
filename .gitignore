@@ -1,3 +1,5 @@
 airline/__pycache__/
 flight/__pycache__/
 flight/migrations/__pycache__/
+core/__pycache__/
+core/migrations/__pycache__/
