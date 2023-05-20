@@ -4,13 +4,13 @@ from .models import *
 
 class AirportSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ["city", "code"]
+        fields = ["id", "city", "code"]
         model = Airport
 
 
 class PassengerSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ["first_name", "last_name"]
+        fields = ["id", "user_id", "first_name", "last_name"]
         model = Passenger
 
 
@@ -22,7 +22,7 @@ class CreateFlightSerializer(serializers.ModelSerializer):
 
 class FlightSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ["origin", "destination", "duration", "passengers", "total_seat", "remaining_seat"]
+        fields = ["id", "origin", "destination", "duration", "passengers", "total_seat", "remaining_seat"]
         model = Flight
     origin = AirportSerializer()
     destination = AirportSerializer()
