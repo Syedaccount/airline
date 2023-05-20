@@ -31,6 +31,8 @@ class Flight(models.Model):
 class Passenger(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     flight = models.ManyToManyField(Flight, blank=True, related_name="passengers")
+    phone = models.CharField(max_length=64)
+    birth_date = models.DateTimeField()
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
