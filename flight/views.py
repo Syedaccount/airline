@@ -35,4 +35,4 @@ class BookFlightViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         print(self.kwargs)
-        return {"flight_pk": self.kwargs.get("flight_pk")}
+        return {"user_id": self.request.user.id, "flight_id": self.kwargs.get("flight_pk")}
