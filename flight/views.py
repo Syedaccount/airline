@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Airport, Flight, Passenger, BookFlight
 from .serializers import (AirportSerializer, FlightSerializer,
                           PassengerSerializer, CreateFlightSerializer,
@@ -31,8 +31,7 @@ class PassengerViewSet(ModelViewSet):
 class BookFlightViewSet(ModelViewSet):
     queryset = BookFlight.objects.all()
     serializer_class = BookFlightSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get_serializer_context(self):
-        print(self.kwargs)
         return {"user_id": self.request.user.id, "flight_id": self.kwargs.get("flight_pk")}
