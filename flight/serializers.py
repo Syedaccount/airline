@@ -10,7 +10,7 @@ class AirportSerializer(serializers.ModelSerializer):
 
 class PassengerSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ["id", "user_id", "first_name", "last_name"]
+        fields = ["id", "user_id", "phone", "birth_date"]
         model = Passenger
 
 
@@ -31,13 +31,12 @@ class FlightSerializer(serializers.ModelSerializer):
 
 class BookFlightSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ["flight", "passenger"]
+        fields = ["passenger"]
         model = BookFlight
 
-    flight = FlightSerializer(read_only=True)
-    passenger = PassengerSerializer(read_only=True, many=True)
+    passenger = PassengerSerializer(read_only=True)
 
     def create(self, validated_data):
-        print("create -----------------=============")
-        print(self.context)
-        print(validated_data)
+        user_id, flight_id = self.context.get("user_id"), self.context.get("flight_id")
+        passenger = Passenger.objects.get(user_id=user_id)
+        return BookFlight.objects.create(passenger_id=passenger.id, flight_id=flight_id)
